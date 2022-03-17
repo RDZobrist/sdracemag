@@ -41,7 +41,7 @@ const Cards = ({room, socket}) => {
     }
   }
 
-  const handleJoin = (e) => {
+  const handleJoin = (e => {
     if(room.pack == 2) {
       e.preventDefault();
       if(password == room.password) {
@@ -54,7 +54,7 @@ const Cards = ({room, socket}) => {
       socket.emit("join", { wallet: account, roomID: room.id, isApprove: true });
       navigate('/playgame/' + room.id);
     }
-  }
+  })
 
   return (
     <>

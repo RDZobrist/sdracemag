@@ -13,8 +13,8 @@ const ScoreContent = ({ socket, user }) => {
   useEffect(() => {
     socket.emit("rooms");
     socket.on("rooms", (data) => {
-      let i = 0 
-      const rooms = data.map((element) => {
+      let i = 0;
+      const rooms = data.map(element => {
         i ++;
         return <Cards key={i} room={element} socket={socket}/>
       })

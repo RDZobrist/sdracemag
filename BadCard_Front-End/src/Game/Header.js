@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import Modal from "react-modal";
@@ -39,7 +39,7 @@ const Header = ({ socket, room, user }) => {
 
     const leave = () => {
         socket.emit("leave", {room: room, user: user})
-        if(user.wallet == room.judge.wallet && room.state != 0 && room.users.length > 1) {
+        if(user.wallet === room.judge.wallet && room.state !== 0 && room.users.length > 1) {
             socket.emit("next", { vote: [], room: room })
         }
         navigate('/home');
@@ -66,7 +66,7 @@ const Header = ({ socket, room, user }) => {
     }
     
     return (
-        <>
+        <Fragment>
             <div className="first">
                 <div className="game-name">
                     <div className='room-name'>{room.name}</div>
@@ -191,7 +191,7 @@ const Header = ({ socket, room, user }) => {
                     </div>
                 </div>
             </Modal>
-        </>
+        </Fragment>
     );
 }
 

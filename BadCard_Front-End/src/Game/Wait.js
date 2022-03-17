@@ -26,6 +26,7 @@ const Wait = ({ socket, room, user }) => {
         }
     }
 
+
     const onStart = () => {
         setStartFlag(true);
         socket.emit("start", room.id);
@@ -54,7 +55,7 @@ const Wait = ({ socket, room, user }) => {
                             >
                                 Start the game
                             </Button>
-                        : ""
+                        : null
                     }
                 </span>
             </div>

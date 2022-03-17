@@ -185,36 +185,6 @@ const disconnect = (socketInfo) => {
     }
 }
 
-    // if(userIndex > -1) {
-
-    //     user == users.
-    //     for(let room of rooms) {
-            // const roomUserIndex = room.users.findIndex(ele => ele.socket == socketInfo.id)
-            // if(roomUserIndex > -1) {
-            //     room.users.splice(roomUserIndex, 1);
-            // }
-            // if(room.users.length == 0) {
-            //     const roomIndex = rooms.findIndex(e => e.id ==  room.id);
-            //     if(roomIndex > -1) {
-            //         rooms.splice(roomIndex, 1);
-            //     }
-            //     clearInterval(room.timerContainer);
-            //     clearTimeout(room.timerOutContainer);
-
-            //     io.to(room.id).emit("room", null);
-            //     sendRoomsInfo();
-
-            // } else {
-
-            //     const sendData = { ...room };
-            //     delete sendData.timerContainer;
-            //     delete sendData.timerOutContainer;
-
-            //     io.to(room.id).emit( "room", sendData );
-            // }
-        // }
-    // }
-// }
 
 io.sockets.on("connection", function (socket) {
 
@@ -349,7 +319,7 @@ io.sockets.on("connection", function (socket) {
         io.to(roomID).emit("content", content);
     })
 
-    const next = async (data) => {
+    const next = async data => {
         const content = getOneCardContent()
         let room = rooms.find(e => e.id == data.room.id)
 
@@ -462,6 +432,9 @@ io.sockets.on("connection", function (socket) {
             console.log('data_id', data.id)
             console.log("mylog", io.of('/').in(data.id));
             io.of('/').in(data.id).clients(function(error, clients) {
+                if(error){
+                    throw new Error('Whoops....error, there seems to be this: ', error)
+                }
                 if (clients.length > 0) {
 
                     clients.forEach(function (socket_id) {

@@ -12,7 +12,7 @@ const PlayGame = ({socket, user}) => {
 
     const { id } = useParams();
     const [roomInfo, setRoomInfo] = useState({})
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
     useEffect( () => {
         if(user) {
@@ -27,7 +27,8 @@ const PlayGame = ({socket, user}) => {
             })
         }
     }, [socket, user] )
-    
+
+    }
     useEffect( () => {
     }, [roomInfo]) 
 

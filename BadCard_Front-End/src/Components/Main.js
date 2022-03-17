@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import "./Main.css";
 import Cards from "./Cards";
 
@@ -14,13 +14,12 @@ const Main = ({ socket }) => {
         i ++;
         return <Cards key={i} room={element} socket={socket}/>
       })
-
       setOpenRooms(rooms)
     })
   }, [socket])
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="main-data">
         <div className="main-heading">
           <span>Games:</span>
@@ -29,7 +28,7 @@ const Main = ({ socket }) => {
           {openRooms}
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

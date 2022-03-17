@@ -11,11 +11,11 @@ const Chatbox = ({socket, chatAll, user}) => {
     let chatContents = []
 
     useEffect( () => {
-        let index = 0
+        let index = 0;
         socket.on("chat", (data) => {
             chatContents.push(data)
             console.log('chatContents', chatContents)
-            const contents = chatContents.map((element) => 
+            const contents = chatContents.map(element => 
                 <div className="chatbox-details" key={ index ++ }>
                     <div className="person-image">
                         {/* <img src={Logo} alt="person-image" /> */}
@@ -32,15 +32,13 @@ const Chatbox = ({socket, chatAll, user}) => {
     }, [socket]);
 
     const onSend = () => {
-        if(content === "") {
-            contentRef.current.style.border = '1px solid red';
-        } else {
-            socket.emit("chat", {
-                user : user,
-                content: content,
-                chatAll: chatAll
-            })
-        }
+        !content.length ?
+        contentRef.current.style.border = '1px solid red' :
+         socket.emit("chat", {
+            user : user,
+            content: content,
+            chatAll: chatAll
+        })
 
         setContent("");
     }

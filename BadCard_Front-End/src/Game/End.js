@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 const End = ({ socket, room, user }) => {
     const [championStrs, setWinnerStr] = useState("")
@@ -9,9 +9,11 @@ const End = ({ socket, room, user }) => {
 
         setWinner(winners)
         setWinnerStr(winnersStr)
+
+
     }, [room])
     return (
-        <>
+        <Fragment>
             <div 
                 style={{
                     textAlign: 'center',
@@ -34,7 +36,7 @@ const End = ({ socket, room, user }) => {
                     }
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 }
 

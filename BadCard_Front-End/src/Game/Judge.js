@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
-const Judge = ({ socket, room, user }) => {
+const Judge = ({ socket, room }) => {
 
     const [content, setContent] = useState({});
     const [voteInfo, setVoteInfo] = useState([]);
     const [timer, setTimer] = useState(60);
 
-    let index = 0;
     let i = 0;
 
     useEffect( () => {
@@ -26,28 +25,27 @@ const Judge = ({ socket, room, user }) => {
         socket.emit("next", { vote: voteInfo, room: room });
     }
 
-    const vote = (e) => {
-        console.log(e.target.checked)
-        console.log(e.target.value)
-        const checked = e.target.checked;
-        const value = e.target.value;
+    const vote = e => {
+      
+        let checked = e.target.checked;
+        let value = e.target.value;
 
         if(checked) {
-            const isExist = voteInfo.find(e => e == value)
+            const isExist = voteInfo.find(e => e === value)
             if(!isExist) {
                 voteInfo[0] = value
             }
         } else {
             const isExist = voteInfo.find(e => e == value)
             if(isExist) {
-                const index = voteInfo.findIndex(e => e == value)
+                const index = voteInfo.findIndex(e => e === value)
                 voteInfo.splice(index, 1)
             }
         }
         setVoteInfo(voteInfo)
     }
     return (
-        <>
+        <Fragment>
             <div className="second" style={{ color: 'white', paddingLeft: '20px', flexDirection: 'row', paddingBottom: '1rem' }}>
                 <div style={{ maxWidth: 'calc(100% - 175px)'}}>
                     <h1 style={{marginLeft: 0}}>Question</h1>
@@ -64,7 +62,7 @@ const Judge = ({ socket, room, user }) => {
                 </div>
             </div>
             {
-                room.state == 1 
+                room.state === 1 
                 ? (
                     <div 
                         style={{
@@ -207,7 +205,7 @@ const Judge = ({ socket, room, user }) => {
                     )
                 )
             }
-        </>
+        </Fragment>
     );
 }
 
